@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
+
 class MNISTNet(nn.Module):
     def __init__(self):
         super().__init__()
@@ -9,20 +11,16 @@ class MNISTNet(nn.Module):
             nn.Conv2d(1, 32, kernel_size=3),
             nn.ReLU(),
             nn.MaxPool2d(2),
-            nn.Conv2d(32, 32, kernel_size=3),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
-            nn.Conv2d(32, 32, kernel_size=3),
+            nn.Conv2d(32, 32, kernel_size=3, stride=2),
+            nn.BatchNorm2d(32),
         )
-        self.fc_layers = nn.Sequential(
-            nn.Linear(32 * 3 * 3, 10),
-            # nn.Linear(32, 10)
-        )
+        self.fc_layers = nn.Linear(32 * 6 * 6, 10)
 
     def forward(self, x):
         x = self.conv_layers(x)
         x = x.view(x.size(0), -1)
         x = self.fc_layers(x)
+        x = F.log_softmax(x,1)
         return x
 
     def count_parameters(self):

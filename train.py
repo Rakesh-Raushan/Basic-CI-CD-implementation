@@ -25,6 +25,11 @@ def train_one_epoch(model, device, train_loader, optimizer, criterion):
     return 100. * correct / total
 
 def main():
+    # Set random seeds for reproducibility
+    torch.manual_seed(42)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     

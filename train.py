@@ -26,7 +26,7 @@ def train_one_epoch(model, device, train_loader, optimizer, criterion):
 
 def main():
     # Set device
-    device = "mps"#torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     # Load data
     transform = transforms.Compose([

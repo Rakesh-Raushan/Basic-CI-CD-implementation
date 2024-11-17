@@ -3,13 +3,14 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms
 from network import MNISTNet
+import tqdm
 
 def train_one_epoch(model, device, train_loader, optimizer, criterion):
     model.train()
     correct = 0
     total = 0
     
-    for batch_idx, (data, target) in enumerate(train_loader):
+    for batch_idx, (data, target) in tqdm.tqdm(enumerate(train_loader)):
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
         output = model(data)
@@ -25,7 +26,7 @@ def train_one_epoch(model, device, train_loader, optimizer, criterion):
 
 def main():
     # Set device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = "mps"#torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     # Load data
     transform = transforms.Compose([
@@ -43,12 +44,12 @@ def main():
     
     # Train for one epoch
     accuracy = train_one_epoch(model, device, train_loader, optimizer, criterion)
-    print(f"Accuracy after one epoch: {accuracy:.2f}%")
+    print(f"Accuracy after one epoch: {accuracy:.2f}% with parameters: {model.count_parameters()}")
     
     # Save model and metrics
     torch.save(model.state_dict(), 'mnist_model.pth')
     with open('training_metrics.txt', 'w') as f:
-        f.write(f"{accuracy}")
+        f.write(f"accuracy:{accuracy},epoch:1")
     
     return accuracy
 

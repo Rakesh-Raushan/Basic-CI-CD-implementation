@@ -49,7 +49,7 @@ def main():
     # Save model and metrics
     torch.save(model.state_dict(), 'mnist_model.pth')
     with open('training_metrics.txt', 'w') as f:
-        f.write(f"accuracy:{accuracy},epoch:1")
+        f.write(f"{accuracy}")
     
     return accuracy
 

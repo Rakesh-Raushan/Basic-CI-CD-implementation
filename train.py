@@ -45,8 +45,11 @@ def main():
     accuracy = train_one_epoch(model, device, train_loader, optimizer, criterion)
     print(f"Accuracy after one epoch: {accuracy:.2f}%")
     
-    # Save model
+    # Save model and metrics
     torch.save(model.state_dict(), 'mnist_model.pth')
+    with open('training_metrics.txt', 'w') as f:
+        f.write(f"{accuracy}")
+    
     return accuracy
 
 if __name__ == "__main__":

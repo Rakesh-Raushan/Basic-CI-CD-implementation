@@ -37,3 +37,7 @@ ENV/
 
 # Misc
 .DS_Store 
+
+# Training artifacts
+*.pth
+training_metrics.txt 

@@ -1,4 +1,4 @@
-name: Model Training and Testing
+name: Model Tests
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
     
     - name: Train model
       run: |
-        python train.py
+        python train.py  # No augmentations for CI/CD
     
     - name: Run tests
       run: |

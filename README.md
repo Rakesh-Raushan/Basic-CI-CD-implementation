@@ -1,5 +1,7 @@
 # MNIST Classification with PyTorch
 
+[![Model Tests](https://github.com/Rakesh-Raushan/Basic-CI-CD-implementation/actions/workflows/model_tests.yml/badge.svg)](https://github.com/Rakesh-Raushan/Basic-CI-CD-implementation/actions/workflows/model_tests.yml)
+
 This project implements a Convolutional Neural Network (CNN) for MNIST digit classification using PyTorch, with automated testing through GitHub Actions.
 
 ## Model Architecture
